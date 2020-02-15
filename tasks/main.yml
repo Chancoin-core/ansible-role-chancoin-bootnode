@@ -15,10 +15,10 @@
         dest: /opt/chancoin
         accept_hostkey: yes
         version: "bootstrap-nodes-pre-desu"
-    - name: copy genesis json to server
-      template:
-        src: files/localchan.json
-        dest: /opt/chancoin/localchan.json
+    # - name: copy genesis json to server
+    #   template:
+    #     src: files/localchan.json
+    #     dest: /opt/chancoin/localchan.json
     - name: make all chancoin
       shell: ./run_make.sh
       args:
