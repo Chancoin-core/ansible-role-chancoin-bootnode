@@ -54,7 +54,7 @@
         dest: /etc/systemd/system/chancoin-bootnode.service
       become: true
     - name: enable chancoin unit
-      shell: systemctl enable chancoin
+      shell: systemctl enable chancoin-bootnode
       become: true
     - name: start chancoin-bootnode service
       service:
