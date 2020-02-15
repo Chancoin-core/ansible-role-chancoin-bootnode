@@ -29,10 +29,10 @@
     #   args:
     #     chdir: /root/.chancoin
     #################################################
-    - name: init chain
-      shell: chancoin init localchan.json
-      args:
-        chdir: /opt/chancoin
+    # - name: init chain
+    #   shell: chancoin init localchan.json
+    #   args:
+    #     chdir: /opt/chancoin
     # - name: copy UTC files to nodes
     #   copy:
     #     src: "{{ item }}"
