@@ -48,9 +48,6 @@
       args:
         chdir: /root/chancoincash/build/bin
       when: "'boot' in group_names"
-    - name: kill tmux session for chan
-      shell: tmux kill-session -t chancoin
-      ignore_errors: true
     - name: create chancoin service unit
       template:
         src: files/chancoin-bootnode.service
