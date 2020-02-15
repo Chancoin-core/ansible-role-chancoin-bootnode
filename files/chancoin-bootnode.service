@@ -2,10 +2,10 @@
 Description=Chancoin go client
 
 [Service]
-User=varg
-Group=varg
+User=root
+Group=root
 Type=simple
-ExecStart=/opt/chancoin/build/bin/bootnode -nodekey ./bootnode.key
+ExecStart=/opt/chancoin/build/bin/bootnode -nodekey /opt/chancoin/build/bin/bootnode.key
 
 [Install]
 WantedBy=default.target
