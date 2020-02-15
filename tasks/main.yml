@@ -14,7 +14,7 @@
         repo: https://github.com/Chancoin-core/chancoin-cash.git
         dest: /opt/chancoin
         accept_hostkey: yes
-        version: "master"
+        version: "bootstrap-nodes-pre-desu"
     - name: copy genesis json to server
       template:
         src: files/localchan.json
