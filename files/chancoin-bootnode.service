@@ -5,7 +5,7 @@ Description=Chancoin go client
 User=varg
 Group=varg
 Type=simple
-ExecStart=/usr/bin/chancoin/build/bin/bootnode -nodekey ./bootnode.key
+ExecStart=/opt/chancoin/build/bin/bootnode -nodekey ./bootnode.key
 
 [Install]
 WantedBy=default.target
