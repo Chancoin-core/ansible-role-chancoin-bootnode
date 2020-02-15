@@ -4,6 +4,11 @@
         name: build-essential
         state: present
       become: true
+    - name: install git
+      apt:
+        name: git
+        state: present
+      become: true
     - name: clone repository
       git:
         repo: git@github.com:chancoin-core/chancoin-cash.git
