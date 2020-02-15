@@ -1,0 +1,11 @@
+[Unit]
+Description=Chancoin go client
+
+[Service]
+User=varg
+Group=varg
+Type=simple
+ExecStart=/usr/bin/chancoin/build/bin/bootnode -nodekey ./bootnode.key
+
+[Install]
+WantedBy=default.target

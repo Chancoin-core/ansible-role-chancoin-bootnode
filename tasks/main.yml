@@ -1,0 +1,61 @@
+---
+    - name: install build-essential
+      apt:
+        name: build-essential
+        state: present
+      become: true
+    - name: clone repository
+      git:
+        repo: git@github.com:chancoin-core/chancoin-cash.git
+        dest: /opt/chancoin
+        accept_hostkey: yes
+        version: "master"
+    - name: copy genesis json to server
+      template:
+        src: files/localchan.json
+        dest: /opt/chancoin/localchan.json
+    - name: make all chancoin
+      shell: ./run_make.sh
+      args:
+        chdir: /opt/chancoin
+    # NOTE Only do this if you want to nuke the chain
+    # - name: delete existing chain lmao
+    #   shell: rm -rf chancoin
+    #   args:
+    #     chdir: /root/.chancoin
+    #################################################
+    - name: init chain
+      shell: chancoin init localchan.json
+      args:
+        chdir: /opt/chancoin
+    # - name: copy UTC files to nodes
+    #   copy:
+    #     src: "{{ item }}"
+    #     dest: /root/.chancoin/keystore/
+    #   with_fileglob: "files/utc/testnet/*"
+    - name: generate bootnode key
+      shell: ./bootnode -genkey bootnode.key
+      args:
+        chdir: /opt/chancoin/build/bin
+    - name: slurp the bootnode address down
+      shell: "./bootnode -nodekey bootnode.key -writeaddress"
+      register: bootnode_address
+      args:
+        chdir: /root/chancoincash/build/bin
+      when: "'boot' in group_names"
+    - name: kill tmux session for chan
+      shell: tmux kill-session -t chancoin
+      ignore_errors: true
+    - name: create chancoin service unit
+      template:
+        src: files/chancoin-bootnode.service
+        dest: /etc/systemd/system/chancoin-bootnode.service
+      become: true
+    - name: enable chancoin unit
+      shell: systemctl enable chancoin
+      become: true
+    - name: start chancoin-bootnode service
+      service:
+        name: chancoin-bootnode
+        state: started
+      become: true
