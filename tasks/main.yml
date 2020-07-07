@@ -11,7 +11,7 @@
       become: true
     - name: clone repository
       git:
-        repo: https://github.com/Chancoin-core/chancoin-cash.git
+        repo: https://github.com/Chancoin-core/chancoin-gold.git
         dest: /opt/chancoin
         accept_hostkey: yes
         version: "{{ chancoin_branch }}"
